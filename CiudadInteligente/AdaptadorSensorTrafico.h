@@ -23,3 +23,5 @@ public:
         return sensorExterno.obtenerCodigoSensor();
     }
 };
+
+//KEILOR BALTODANO MARTÍNEZ
