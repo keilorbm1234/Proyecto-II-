@@ -137,6 +137,7 @@
     <ClCompile Include="GestorArchivos.cpp" />
     <ClCompile Include="GestorCiudad.cpp" />
     <ClCompile Include="PlantaSolar.cpp" />
+    <ClCompile Include="Reporte.cpp" />
     <ClCompile Include="SimuladorCarreterasInteligentes.cpp" />
     <ClCompile Include="ViaAlterna.cpp" />
   </ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="EstacionCargaElectrica.h" />
     <ClInclude Include="EstrategiaAhorro.h" />
     <ClInclude Include="FabricaCarretera.h" />
+    <ClInclude Include="FuenteDatosReporte.h" />
     <ClInclude Include="GestorArchivos.h" />
     <ClInclude Include="GestorCiudad.h" />
     <ClInclude Include="IConsumidor.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="IteradorDistrito.h" />
     <ClInclude Include="MedicionTrafico.h" />
     <ClInclude Include="PlantaSolar.h" />
+    <ClInclude Include="Reporte.h" />
     <ClInclude Include="SensorTraficoExterno.h" />
     <ClInclude Include="SimuladorCarreterasInteligentes.h" />
     <ClInclude Include="ViaAlterna.h" />
