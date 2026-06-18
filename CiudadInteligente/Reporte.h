@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+//ESTA CLASE SE ENCARGARÁ DE ALMACENAR INFORMACIÓN DE UN REPORTE GENERADO EN UN MOMENTO DADO. 
+
 class Reporte {
 private:
     string modulo;
