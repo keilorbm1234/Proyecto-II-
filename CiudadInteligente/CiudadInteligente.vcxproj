@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdaptadorEnergia.cpp" />
     <ClCompile Include="CentralEmergencias.cpp" />
     <ClCompile Include="CentroControlVial.cpp" />
     <ClCompile Include="CiudadInteligente.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="ViaAlterna.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdaptadorEnergia.h" />
     <ClInclude Include="AdaptadorSensorTrafico.h" />
     <ClInclude Include="AnalizadorGenerico.h" />
     <ClInclude Include="CentralEmergencias.h" />
