@@ -72,6 +72,12 @@
     <ClCompile Include="AdaptadorEnergia.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="AdaptadorTrafico.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="AdaptadorAmbiental.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEntidad.h">
@@ -171,6 +177,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="AdaptadorEnergia.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AdaptadorTrafico.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AdaptadorAmbiental.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
