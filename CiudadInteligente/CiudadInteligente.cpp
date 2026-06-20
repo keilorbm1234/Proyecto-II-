@@ -17,6 +17,7 @@
 #include "ViaAlterna.h"
 #include "AdaptadorSensorTrafico.h"
 #include "SensorTraficoExterno.h"
+#include "ArchivoReporteException.h"
 
 int main() {
     try {
@@ -52,7 +53,7 @@ int main() {
         motor.agregarDistrito(distCentro);
         motor.agregarDistrito(distIndustrial);
 
-        
+
 
         // 8. Guardar estado inicial del distrito industrial
         std::cout << "\n[1] Guardando estado inicial del distrito industrial...\n";
@@ -93,19 +94,19 @@ int main() {
 
         SistemaReportes* sistema = SistemaReportes::getInstance();
 
-        AdaptadorEnergia adaptadorEnergia(distCentro.get(),sistema);
+        AdaptadorEnergia adaptadorEnergia(distCentro.get(), sistema);
 
         // 13. ESCENARIO DE TRAFICO
 
-        SensorTraficoExterno sensor("S-01",250, 42.5,68.0);
+        SensorTraficoExterno sensor("S-01", 250, 42.5, 68.0);
 
         AdaptadorSensorTrafico adaptadorSensor(sensor);
 
-        CorredorVial corredor("Corredor Principal" );
+        CorredorVial corredor("Corredor Principal");
 
-        corredor.agregarComponente(std::make_unique<ViaAlterna>("Ruta Norte", 5.5, adaptadorSensor ));
+        corredor.agregarComponente(std::make_unique<ViaAlterna>("Ruta Norte", 5.5, adaptadorSensor));
 
-        AdaptadorTrafico adaptadorTrafico(&corredor,sistema);
+        AdaptadorTrafico adaptadorTrafico(&corredor, sistema);
 
         //MENU DE REPORTES PROYECTO II
 
@@ -136,13 +137,13 @@ int main() {
             case 1:
 
                 adaptadorEnergia.generarYNotificar();
-                std::cout<< "Reporte de energia generado.\n";
+                std::cout << "Reporte de energia generado.\n";
 
                 break;
             case 2:
 
                 adaptadorTrafico.generarYNotificar();
-                std::cout<< "Reporte de trafico generado.\n";
+                std::cout << "Reporte de trafico generado.\n";
 
                 break;
             case 3:
@@ -154,32 +155,40 @@ int main() {
 
                 std::string modulo;
                 std::cout << "Digite el modulo: ";
-                std::cin>> modulo;
+                std::cin >> modulo;
 
                 sistema->mostrarPorModulo(modulo);
 
                 break;
             }
             case 5:
-
-                sistema->guardarEnArchivo();
-                std::cout<< "Reportes guardados.\n";
-
+                try {
+                    sistema->guardarEnArchivo();
+                    std::cout << "Reportes guardados.\n";
+                }
+                catch (const ArchivoReporteException& error) {
+                    std::cerr << "Error: " << error.what() << std::endl;
+                }
                 break;
+
             case 6:
-
-                sistema->cargarDesdeArchivo();
-                std::cout<< "Reportes cargados.\n";
-
+                try {
+                    sistema->cargarDesdeArchivo();
+                    std::cout << "Reportes cargados.\n";
+                }
+                catch (const ArchivoReporteException& error) {
+                    std::cerr << "Error: " << error.what() << std::endl;
+                }
                 break;
+
             case 7:
 
-                std::cout<< "Saliendo...\n";
+                std::cout << "Saliendo...\n";
 
                 break;
             default:
 
-                std::cout<< "Numero incorrecto\n";
+                std::cout << "Numero incorrecto\n";
             }
 
         } while (opcion != 7);
@@ -189,6 +198,5 @@ int main() {
     catch (const std::exception& error) {
         std::cerr << "Error inesperado: " << error.what() << std::endl;
     }
-
-    return 0;
+    return 0; 
 }
