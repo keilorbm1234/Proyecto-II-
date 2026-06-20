@@ -9,6 +9,15 @@
 #include "DeficitRecursoException.h"
 #include "EntidadBase.h"
 
+//INCLUDES DEL PROYECTO II SAMUEL Y KEILOR
+#include "SistemaReportes.h"
+#include "AdaptadorEnergia.h"
+#include "AdaptadorTrafico.h"
+#include "CorredorVial.h"
+#include "ViaAlterna.h"
+#include "AdaptadorSensorTrafico.h"
+#include "SensorTraficoExterno.h"
+
 int main() {
     try {
         std::cout << "===== INICIO DE SIMULACION DE CIUDAD INTELIGENTE =====\n\n";
@@ -42,6 +51,8 @@ int main() {
         // 7. Registrar distritos en el gestor
         motor.agregarDistrito(distCentro);
         motor.agregarDistrito(distIndustrial);
+
+        
 
         // 8. Guardar estado inicial del distrito industrial
         std::cout << "\n[1] Guardando estado inicial del distrito industrial...\n";
@@ -77,6 +88,101 @@ int main() {
 
         std::cout << "\nReporte del distrito industrial RECARGADO desde archivo:\n";
         distIndustrial->mostrarReporteDistrito();
+
+        // 12. SISTEMA DE REPORTES PROYECTO II
+
+        SistemaReportes* sistema = SistemaReportes::getInstance();
+
+        AdaptadorEnergia adaptadorEnergia(distCentro.get(),sistema);
+
+        // 13. ESCENARIO DE TRAFICO
+
+        SensorTraficoExterno sensor("S-01",250, 42.5,68.0);
+
+        AdaptadorSensorTrafico adaptadorSensor(sensor);
+
+        CorredorVial corredor("Corredor Principal" );
+
+        corredor.agregarComponente(std::make_unique<ViaAlterna>("Ruta Norte", 5.5, adaptadorSensor ));
+
+        AdaptadorTrafico adaptadorTrafico(&corredor,sistema);
+
+        //MENU DE REPORTES PROYECTO II
+
+        int opcion;
+
+        do {
+
+            std::cout << "\n_______SISTEMA DE REPORTES_______\n";
+
+            std::cout << "1. Generar reporte de energia\n";
+
+            std::cout << "2. Generar reporte de trafico\n";
+
+            std::cout << "3. Mostrar todos los reportes\n";
+
+            std::cout << "4. Mostrar reportes por modulo\n";
+
+            std::cout << "5. Guardar reportes\n";
+
+            std::cout << "6. Cargar reportes\n";
+
+            std::cout << "7. Salir\n";
+
+            std::cin >> opcion;
+
+            switch (opcion) {
+
+            case 1:
+
+                adaptadorEnergia.generarYNotificar();
+                std::cout<< "Reporte de energia generado.\n";
+
+                break;
+            case 2:
+
+                adaptadorTrafico.generarYNotificar();
+                std::cout<< "Reporte de trafico generado.\n";
+
+                break;
+            case 3:
+
+                sistema->mostrarTodos();
+
+                break;
+            case 4: {
+
+                std::string modulo;
+                std::cout << "Digite el modulo: ";
+                std::cin>> modulo;
+
+                sistema->mostrarPorModulo(modulo);
+
+                break;
+            }
+            case 5:
+
+                sistema->guardarEnArchivo();
+                std::cout<< "Reportes guardados.\n";
+
+                break;
+            case 6:
+
+                sistema->cargarDesdeArchivo();
+                std::cout<< "Reportes cargados.\n";
+
+                break;
+            case 7:
+
+                std::cout<< "Saliendo...\n";
+
+                break;
+            default:
+
+                std::cout<< "Numero incorrecto\n";
+            }
+
+        } while (opcion != 7);
 
         std::cout << "\n===== FIN DE LA SIMULACION =====\n";
     }
