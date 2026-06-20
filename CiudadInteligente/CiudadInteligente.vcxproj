@@ -126,6 +126,7 @@
     <ClCompile Include="AdaptadorAmbiental.cpp" />
     <ClCompile Include="AdaptadorEnergia.cpp" />
     <ClCompile Include="AdaptadorTrafico.cpp" />
+    <ClCompile Include="ArchivoReporteException.cpp" />
     <ClCompile Include="CentralEmergencias.cpp" />
     <ClCompile Include="CentroControlVial.cpp" />
     <ClCompile Include="CiudadInteligente.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="AdaptadorTrafico.h" />
     <ClInclude Include="AdaptadorSensorTrafico.h" />
     <ClInclude Include="AnalizadorGenerico.h" />
+    <ClInclude Include="ArchivoReporteException.h" />
     <ClInclude Include="CentralEmergencias.h" />
     <ClInclude Include="CentroControlVial.h" />
     <ClInclude Include="CiudadException.h" />

@@ -8,7 +8,7 @@ using namespace std;
 
 class FuenteDatosReporte {
 public:
-    ~FuenteDatosReporte() = default; 
+    virtual ~FuenteDatosReporte() = default; 
     virtual string getNombreModulo() = 0; 
     virtual string generarContenidoReporte() = 0; 
 };
