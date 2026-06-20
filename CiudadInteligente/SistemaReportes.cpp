@@ -1,4 +1,5 @@
 #include "SistemaReportes.h"
+#include "ArchivoReporteException.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -42,33 +43,31 @@ void SistemaReportes::guardarEnArchivo() {
     ofstream archivo(nombreArchivo);
 
     if (!archivo) {
-        cout << "Error. No existe el archivo." << endl; 
+        throw ArchivoReporteException(nombreArchivo);
     }
-    else {
-        for (const auto& reporte : reportes) {
-            archivo << reporte.getModulo() << endl;
-            archivo << reporte.getContenido() << endl;
-            archivo << reporte.getFechaHora() << endl;
-        }
-        archivo.close();
+    
+    for (const auto& reporte : reportes) {
+        archivo << reporte.getModulo() << endl;
+        archivo << reporte.getContenido() << endl;
+        archivo << reporte.getFechaHora() << endl;
     }
+    archivo.close();
 }
 
 void SistemaReportes::cargarDesdeArchivo() {
     ifstream archivo(nombreArchivo); 
 
     if (!archivo) {
-        cout << "Error. No se pudo abrir el archivo." << endl; 
+        throw ArchivoReporteException(nombreArchivo);
     }
-    else {
-        string modulo, contenido, fechaHora;
-        while (getline(archivo, modulo)){
-            getline(archivo, contenido); 
-            getline(archivo, fechaHora); 
-            Reporte r(modulo, contenido, fechaHora); 
-            reportes.push_back(r);
-        }
-        archivo.close(); 
+
+    string modulo, contenido, fechaHora;
+    while (getline(archivo, modulo)){
+        getline(archivo, contenido); 
+        getline(archivo, fechaHora); 
+        Reporte r(modulo, contenido, fechaHora); 
+        reportes.push_back(r);
     }
+    archivo.close(); 
 }
 
